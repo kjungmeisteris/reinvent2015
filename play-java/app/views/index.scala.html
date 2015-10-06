@@ -1,7 +1,29 @@
-@(message: String)
+@(message: String, pending: Integer, completed: Integer, failed: Integer)
 
 @main("Welcome to Play") {
 
-    @play20.welcome(message, style = "Java")
+    <h2>@message</h2>
+
+    <div id='cssmenu'>
+	    <ul>	      
+	        <li class=''>
+	          <a href='/requests/pending/'>
+	            <span>Pending (@pending)</span>
+	          </a>
+	        </li>
+	      
+	        <li class=''>
+	          <a href='/requests/completed/'>
+	            <span>Completed (@completed)</span>
+	          </a>
+	        </li>
+	      
+	        <li class='last'>
+	          <a href='/requests/failed/'>
+	            <span>Failed (@failed)</span>
+	          </a>
+	        </li>
+	    </ul>
+	</div>
 
 }
