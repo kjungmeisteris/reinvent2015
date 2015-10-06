@@ -13,9 +13,11 @@ public class Tasks extends Model {
     @Id
     public Long id;
 
+    @ManyToOne
     @Constraints.Required
-    public String contact;
+    public String message_id;
 
+    @ManyToOne
     public Long outreach_id;
 
     public Instant created_at;
