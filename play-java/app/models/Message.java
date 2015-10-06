@@ -5,7 +5,9 @@ import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
 
- 
+import java.time.Instant;
+
+
 @Entity 
 public class Message extends Model {
 	private static final long serialVersionUID = 1L;
@@ -17,7 +19,7 @@ public class Message extends Model {
     public String contact;
 
     @Constraints.Required
-    public String arrivaldate;
+    public Instant arrivaldate;
 
     public String body;
 
