@@ -1,3 +1,20 @@
+project/target
+project/project
+logs
+.classpath
+target
+.target
+dist
+bin
+.idea
+*.iml
+.DS_Store
+.project
+project/.sbtserver
+project/.sbtserver.lock
+project/play-fork-run.sbt
+project/sbt-ui.sbt
+
 *.class
 
 # Mobile Tools for Java (J2ME)
