@@ -13,12 +13,12 @@ public class Tasks extends Model {
     @Id
     public Long id;
 
-    @ManyToOne
+    @OneToOne
     @Constraints.Required
-    public String message_id;
+    public Message message;
 
     @ManyToOne
-    public Long outreach_id;
+    public Outreachteam outreachteam;
 
     public Instant created_at;
 
