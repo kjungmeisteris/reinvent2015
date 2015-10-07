@@ -21,7 +21,14 @@ public class Task extends Controller {
             message.lat = lat;
             message.lng = lng;
             message.save();
-//            Tasks pendingTask = Tasks.find.where().
+            Tasks pendingTask = Tasks.find.where().eq("sender", sender).eq("status", "PENDING").findUnique();
+            if (pendingTask == null) {
+                Tasks task = new Tasks();
+                task.contact = sender;
+                task.created_at = Instant.now();
+                task.status = "PENDING";
+                task.save();
+            }
         });
 
         return ok(index.render("Welcome to the UNICEF vaccine delivery dashboard!", 1, 2, 3));
