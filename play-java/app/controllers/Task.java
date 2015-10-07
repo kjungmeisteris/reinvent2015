@@ -1,9 +1,11 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Message;
 import models.Tasks;
 import org.joda.time.DateTime;
+import play.libs.Json;
 import play.mvc.Result;
 import play.mvc.Controller;
 import views.html.index;
@@ -16,7 +18,8 @@ public class Task extends Controller {
 
     public Result fromMessage(String sender, String incomingMessage, Double lat, Double lng) {
 
-        Ebean.execute(() -> {
+        //Tasks pendingTask = null;
+        return Ebean.execute(() -> {
             Message message = new Message();
             message.body = incomingMessage;
             message.contact = sender;
@@ -32,9 +35,16 @@ public class Task extends Controller {
                 task.status = "PENDING";
                 task.save();
             }
+            final ObjectNode response = Json.newObject();
+            Long taskId = pendingTask.id;
+            response.put("dispatchURL", "tasks/completed/" + taskId);
+            response.put("deliveredURL", "tasks/delivered/" + taskId);
+            response.put("completedURL", "tasks/completed/" + taskId);
+
+            return ok(response);
         });
 
-        return ok(index.render("Welcome to the UNICEF vaccine delivery dashboard!", 1, 2, 3));
+        // return ok(index.render("Welcome to the UNICEF vaccine delivery dashboard!", 1, 2, 3));
     }
 
     public Result dispatch(Long taskId) {
@@ -45,6 +55,7 @@ public class Task extends Controller {
                 if (taskOpt.isPresent()) {
                     Tasks task = taskOpt.get();
                     task.dispatched_at = Instant.now();
+                    task.status = "DISPATCHED";
                     task.update();
                 } else {
                     throw new IllegalArgumentException("Unknown task id: " + taskId);
@@ -56,5 +67,47 @@ public class Task extends Controller {
 
         return ok();
     }
+
+    public Result delivered(Long taskId) {
+
+        try {
+            Ebean.execute(() -> {
+                Optional<Tasks> taskOpt = Tasks.findByJobId(taskId);
+                if (taskOpt.isPresent()) {
+                    Tasks task = taskOpt.get();
+                    task.received_at = Instant.now();
+                    task.status = "DELIVERED";
+                    task.update();
+                } else {
+                    throw new IllegalArgumentException("Unknown task id: " + taskId);
+                }
+            });
+        } catch (IllegalArgumentException e) {
+            return notFound();
+        }
+
+        return ok();
+    }
+
+    public Result completed(Long taskId) {
+
+        try {
+            Ebean.execute(() -> {
+                Optional<Tasks> taskOpt = Tasks.findByJobId(taskId);
+                if (taskOpt.isPresent()) {
+                    Tasks task = taskOpt.get();
+                    task.status = "COMPLETED";
+                    task.update();
+                } else {
+                    throw new IllegalArgumentException("Unknown task id: " + taskId);
+                }
+            });
+        } catch (IllegalArgumentException e) {
+            return notFound();
+        }
+
+        return ok();
+    }
+
 
 }
