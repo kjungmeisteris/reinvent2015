@@ -28,11 +28,11 @@ public class Task extends Controller {
             message.save();
             Tasks pendingTask = Tasks.find.where().eq("contact", sender).eq("status", "PENDING").findUnique();
             if (pendingTask == null) {
-                Tasks task = new Tasks();
-                task.contact = sender;
-                task.created_at = Instant.now();
-                task.status = "PENDING";
-                task.save();
+                pendingTask = new Tasks();
+                pendingTask.contact = sender;
+                pendingTask.created_at = Instant.now();
+                pendingTask.status = "PENDING";
+                pendingTask.save();
             }
             final ObjectNode response = Json.newObject();
             Long taskId = pendingTask.id;

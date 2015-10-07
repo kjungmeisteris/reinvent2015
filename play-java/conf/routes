@@ -6,7 +6,7 @@
 GET     /                           controllers.Application.index()
 
 # Tasks
-POST    /tasks/fromMessage          controllers.Task.fromMessage(sender: String, incomingMessage: String, lat: Double ?= 0, lng: Double ?= 0)
+GET    /tasks/fromMessage          controllers.Task.fromMessage(sender: String, incomingMessage: String, lat: Double ?= 0, lng: Double ?= 0)
 GET     /tasks/dispatch/:id         controllers.Task.dispatch(id: Long)
 GET     /tasks/delivered/:id        controllers.Task.delivered(id: Long)
 GET     /tasks/completed/:id        controllers.Task.completed(id: Long)
