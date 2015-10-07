@@ -1,29 +1,41 @@
-@(message: String, pending: Integer, completed: Integer, failed: Integer)
+@(pending: Integer, completed: Integer, failed: Integer)
 
 @main("Welcome to Play") {
 
-    <h2>@message</h2>
+    Messages
 
     <div id='cssmenu'>
 	    <ul>	      
-	        <li class=''>
-	          <a href='/requests/pending/'>
-	            <span>Pending (@pending)</span>
-	          </a>
+	        <li class='' id="pending-messages">
+                <a href='#'>
+	                <span>Pending (@pending)</span>
+                </a>
 	        </li>
 	      
-	        <li class=''>
-	          <a href='/requests/completed/'>
+	        <li class='' id="completed-messages">
+	          <a href='#'>
 	            <span>Completed (@completed)</span>
 	          </a>
 	        </li>
 	      
-	        <li class='last'>
-	          <a href='/requests/failed/'>
+	        <li class='last' id="failed-messages">
+	          <a href='#'>
 	            <span>Failed (@failed)</span>
 	          </a>
 	        </li>
 	    </ul>
 	</div>
+
+    <div id="messages-display">
+        <table class="tg">
+            <tr>
+                <th class="tg-yw4l">Sender</th>
+                <th class="tg-yw4l">Sent at</th>
+                <th class="tg-yw4l">Request</th>
+            </tr>
+            <tr id="messages-display-content">
+            </tr>
+        </table>
+    </div>
 
 }

@@ -18,7 +18,6 @@ public class Task extends Controller {
 
     public Result fromMessage(String sender, String incomingMessage, Double lat, Double lng) {
 
-        //Tasks pendingTask = null;
         return Ebean.execute(() -> {
             Message message = new Message();
             message.body = incomingMessage;
