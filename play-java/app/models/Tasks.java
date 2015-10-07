@@ -1,11 +1,9 @@
 package models;
 
 import java.time.Instant;
-import java.util.*;
 import javax.persistence.*;
 
 import com.avaje.ebean.Model;
-import play.data.format.*;
 import play.data.validation.*;
 
 @Entity
@@ -13,9 +11,8 @@ public class Tasks extends Model {
     @Id
     public Long id;
 
-    @OneToOne
     @Constraints.Required
-    public Message message;
+    public String contact;
 
     @ManyToOne
     public Outreachteam outreachteam;
