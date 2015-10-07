@@ -6,8 +6,8 @@
 GET     /                           controllers.Application.index()
 
 # Tasks
-POST    /tasks/fromMessage          controllers.Task.fromMessage(sender: String, incomingMessage: String, lat: Double, lng: Double)
 GET     /tasks/dispatch/:id         controllers.Task.dispatch(id: Long)
+POST    /tasks/fromMessage          controllers.Task.fromMessage(sender: String, incomingMessage: String, lat: Double ?= 0, lng: Double ?= 0)
 
 # Outreach team stuff
 GET /outreach/all                   controllers.Outreach.getAll()

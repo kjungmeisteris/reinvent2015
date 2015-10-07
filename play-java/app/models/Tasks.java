@@ -9,6 +9,7 @@ import com.avaje.ebean.Model;
 import play.data.validation.*;
 
 @Entity
+@Table(name="tasks")
 public class Tasks extends Model {
     @Id
     public Long id;
@@ -16,8 +17,7 @@ public class Tasks extends Model {
     @Constraints.Required
     public String contact;
 
-    @ManyToOne
-    public Outreachteam outreachteam;
+    public long outreach_id;
 
     public Instant created_at;
 

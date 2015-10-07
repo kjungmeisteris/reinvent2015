@@ -2,13 +2,13 @@ package models;
 
 import javax.persistence.*;
 
-import play.db.ebean.*;
+import com.avaje.ebean.Model;
 import play.data.validation.*;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
-
-@Entity 
+@Entity
+@Table(name="messages")
 public class Message extends Model {
 	private static final long serialVersionUID = 1L;
 
@@ -19,8 +19,9 @@ public class Message extends Model {
     public String contact;
 
     @Constraints.Required
-    public Instant arrivaldate;
+    public Timestamp arrived_at;
 
+    @Constraints.Required
     public String body;
 
     public Double lat;
