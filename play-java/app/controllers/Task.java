@@ -8,6 +8,7 @@ import play.mvc.Controller;
 import views.html.index;
 
 import java.time.Instant;
+import java.util.Optional;
 
 public class Task extends Controller {
 
@@ -33,4 +34,25 @@ public class Task extends Controller {
 
         return ok(index.render("Welcome to the UNICEF vaccine delivery dashboard!", 1, 2, 3));
     }
+
+    public Result dispatch(Long taskId) {
+
+        try {
+            Ebean.execute(() -> {
+                Optional<Tasks> taskOpt = Tasks.findByJobId(taskId);
+                if (taskOpt.isPresent()) {
+                    Tasks task = taskOpt.get();
+                    task.dispatched_at = Instant.now();
+                    task.update();
+                } else {
+                    throw new IllegalArgumentException("Unknown task id: " + taskId);
+                }
+            });
+        } catch (IllegalArgumentException e) {
+            return notFound();
+        }
+
+        return ok();
+    }
+
 }
