@@ -198,18 +198,29 @@
 body{
     margin:0px;
     background:#000;
+    background-color: #ffffff;
 }
 .header {
-    height:50px;
-    background:#F0F0F0;
-    border:1px solid #CCC;
-    width:960px;
+    height:200px;
+    border:0px solid #CCC;
+    width:1450px;
     margin:0px auto;
+    background-color: #ffffff;
+}
+.header-text {
+    font-size: 24pt;
+    font-style: inherit;
+    display: inline-block;
 }
 .content {
     width:960px;
-    background: #F0F0F0;
+    background-color: #ffffff;
     border: 1px solid #CCC;
     height: 2000px;
     margin: 20px auto;
 }
+
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-yw4l{vertical-align:top}

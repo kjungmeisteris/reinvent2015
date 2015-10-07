@@ -33,6 +33,6 @@ public class Task extends Controller {
             }
         });
 
-        return ok(index.render("Welcome to the UNICEF vaccine delivery dashboard!", 1, 2, 3));
+        return ok();
     }
 }
