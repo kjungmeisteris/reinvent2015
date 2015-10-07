@@ -18,5 +18,9 @@ public class Outreachteam extends Model {
     @Constraints.Required
     public String contact;
 
-    public static Model.Finder<Long,Outreachteam> find = new Model.Finder<Long,Outreachteam>(Long.class, Outreachteam.class);
+    public static Model.Finder<Long,Outreachteam> find = new Model.Finder<>(Long.class, Outreachteam.class);
+
+    public static List<Outreachteam> all() {
+        return find.all();
+    }
 }
